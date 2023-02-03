@@ -3,10 +3,10 @@ const userRouter = require("express").Router();
 const User = require("../models/user");
 
 //! get all users
-userRouter.get("/all", async (req, res) => {
-  const allUsers = await User.find();
-  res.send(allUsers);
-});
+// userRouter.get("/all", async (req, res) => {
+//   const allUsers = await User.find();
+//   res.send(allUsers);
+// });
 
 //!update
 userRouter.put("/:id", async (req, res) => {
@@ -47,6 +47,19 @@ userRouter.delete("/:id", async (req, res) => {
 });
 
 //! get a user by id or user name
+// userRouter.get("/", async (req, res) => {
+//   const userId = req.query.userId;
+//   const username = req.query.username;
+//   try {
+//     const user = userId
+//       ? await User.findById(userId)
+//       : await User.findOne({ username: username });
+//     const { password, updateAt, ...other } = user._doc;
+//     res.status(200).send(other);
+//   } catch (error) {
+//     res.status(400).send(error.message);
+//   }
+// });
 userRouter.get("/", async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
@@ -54,13 +67,12 @@ userRouter.get("/", async (req, res) => {
     const user = userId
       ? await User.findById(userId)
       : await User.findOne({ username: username });
-    const { password, updateAt, ...other } = user._doc;
-    res.status(200).send(other);
-  } catch (error) {
-    res.status(400).send(error.message);
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
-
 //! get friends
 
 userRouter.get("/friends/:id", async (req, res) => {

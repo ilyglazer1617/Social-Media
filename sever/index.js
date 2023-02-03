@@ -11,6 +11,8 @@ const app = express();
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const messagesRoute = require("./routes/messages");
+const converstionsRoute = require("./routes/converstions");
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () =>
@@ -45,6 +47,9 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
+app.use("/api/conversations", converstionsRoute);
+app.use("/api/messages", messagesRoute);
+
 app.listen(4000, () => {
   console.log("backend Server on live !");
 });

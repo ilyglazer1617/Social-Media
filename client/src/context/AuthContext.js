@@ -16,7 +16,7 @@ const INITIAL_STATE = {
     updatedAt: "2023-01-29T14:33:29.178Z",
     __v: 0,
   },
-  // user: JSON.parse(localStorage.getItem("user")) || null,
+  // user: localStorage.getItem("name") || null,
   isFetching: false,
   error: false,
 };

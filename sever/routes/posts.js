@@ -76,10 +76,10 @@ postRouter.get("/:id", async (req, res) => {
 postRouter.get("/timeLine/:userId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.userId);
-    const userPosts = await Post.find({ userId: req.params.userId }).populate(
+    const userPosts = await Post.find({ userId: currentUser._id }).populate(
       "postBy"
     );
-    console.log(userPosts);
+
     const friendPosts = await Promise.all(
       currentUser.followings.map(async (friendId) => {
         return await Post.find({ userId: friendId }).populate("postBy");

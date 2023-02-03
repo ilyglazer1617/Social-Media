@@ -10,7 +10,14 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import { Users } from "../../dummyData";
 import CloseFriend from "./../closeFriend/closeFriend";
+import { useNavigate } from "react-router-dom";
 const SideBar = () => {
+  const navigate = useNavigate();
+  const loginOut = () => {
+    localStorage.removeItem("name");
+    localStorage.removeItem("x-auth-token");
+    navigate("/login");
+  };
   return (
     <div className="sideBarWrap">
       {" "}
@@ -53,7 +60,12 @@ const SideBar = () => {
             <span className="sidebarListItemText">way of arrival</span>
           </li>
         </ul>
-        <button className="sidebarButton">Show More</button>
+        <div className="sideButton">
+          <button className="sidebarButton">Show More</button>
+          <button className="logOutBtn" onClick={() => loginOut()}>
+            Log Out
+          </button>
+        </div>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
           {Users.map((u) => (

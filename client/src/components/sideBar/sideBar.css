@@ -46,6 +46,8 @@
     padding: 10px;
     border-radius: 7px;
     font-weight: 700;
+    cursor: pointer;
+
 }
 
 .sidebarButton:hover {
@@ -61,4 +63,24 @@
     padding: 0;
     margin: 0;
     list-style: none;
+}
+
+.sideButton {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logOutBtn {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(212, 72, 72);
+}
+
+.logOutBtn:hover {
+    background-color: rgb(169, 87, 87);
 }

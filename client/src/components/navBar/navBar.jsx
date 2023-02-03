@@ -15,6 +15,7 @@ const NavBar = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const navigate = useNavigate();
   const tomBrady = "/tom_brady.png";
+
   return (
     <div className="navBarConteiner">
       <div className="navBarLeft">
@@ -22,6 +23,7 @@ const NavBar = () => {
           talk to travel
         </span>
       </div>
+
       <div className="navBarCenter">
         <div className="serchBar">
           <SearchIcon className="searchIcon" />
@@ -44,7 +46,7 @@ const NavBar = () => {
           </div>
           <div className="topbarIconItem">
             <Badge badgeContent={1} showZero color="success">
-              <MarkUnreadChatAltIcon />{" "}
+              <MarkUnreadChatAltIcon onClick={() => navigate("/messenger")} />{" "}
             </Badge>
           </div>
           <div className="topbarIconItem">

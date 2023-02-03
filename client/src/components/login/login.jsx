@@ -17,6 +17,7 @@ const Login = () => {
       { email: email.current.value, password: password.current.value },
       dispatch
     );
+    navigate("/");
   };
   console.log(user);
   return (
