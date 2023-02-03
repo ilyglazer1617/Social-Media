@@ -7,14 +7,17 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "./../../../context/AuthContext";
 import { io } from "socket.io-client";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Messenger = () => {
+  const navigae = useNavigate();
   const { user } = useContext(AuthContext);
   const [conversation, setConversation] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const scrollRef = useRef();
   const socket = useRef(); //! connect to socket port
 
@@ -38,11 +41,16 @@ const Messenger = () => {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current.emit("addUser", user._id);
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-    });
+    try {
+      socket.current.emit("addUser", user._id);
+      socket.current.on("getUsers", (users) => {
+        setOnlineUsers(users);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, [user]);
+
   //! get Conversations
   useEffect(() => {
     const getConversations = async () => {
@@ -60,6 +68,7 @@ const Messenger = () => {
   }, [user]);
 
   //! get Messages
+
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -75,7 +84,7 @@ const Messenger = () => {
     getMessages();
   }, [currentChat]);
 
-  //! send a new message
+  // ! send a new message
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const message = {
@@ -182,7 +191,11 @@ const Messenger = () => {
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">
-            <ChatOnline />
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user ? user._id : navigae("/")}
+              setCurrentChat={setCurrentChat}
+            />
           </div>
         </div>
       </div>

@@ -56,7 +56,11 @@ const NavBar = () => {
           </div>
         </div>
         <img
-          src={user.profilePicture ? PF + user.profilePicture : PF + tomBrady}
+          src={
+            user && user.profilePicture
+              ? PF + user.profilePicture
+              : PF + tomBrady
+          }
           alt=""
           className="topbarImg"
           onClick={() => navigate(`/profile/${user.username}`)}
