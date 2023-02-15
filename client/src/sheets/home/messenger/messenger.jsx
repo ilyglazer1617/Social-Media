@@ -85,30 +85,7 @@ const Messenger = () => {
   }, [currentChat]);
 
   // ! send a new message
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const message = {
-  //     sender: user._id,
-  //     text: newMessage,
-  //     conversationId: currentChat._id,
-  //   };
 
-  //   const receiverId = currentChat.member.find((member) => member !== user._id);
-  //   socket.current.emit("sendMessage", {
-  //     senderId: user._id,
-  //     receiverId,
-  //     text: newMessage,
-  //   });
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:4000/api/messages",
-  //       message
-  //     );
-  //     setMessages([...messages, res.data]);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
